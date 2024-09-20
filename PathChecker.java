@@ -30,14 +30,14 @@ public class PathChecker {
 
     public void check1(String pathChoice) {
 
-        atStore = pathChoice.equals("yes") || pathChoice.equals("Yes");
+        atStore = pathChoice.equalsIgnoreCase("Yes");
 
         if (atStore == true) {
 
         } else {
 
-            System.out.println("You stay at home, you do not get prepared for the party" + "\n"
-                    + "your friends hate you for throwing a lame party without decorations and food");
+            System.out.println(
+                    "You stay at home, you do not get prepared for the party\nYour friends hate you for throwing a lame party without decorations and food\nYou explain to them that your taxes are due soon and that you needed to save money");
             System.exit(0);
             // System.out.println("You don't go to the store");
             // try {
@@ -113,7 +113,56 @@ public class PathChecker {
 
     }
 
-    public void check5(String pathChoice) {
+    
+
+    public void checkout() {
+
+        if (soda == true) {
+
+            cost += 15.99;
+        }
+
+        if (fruitPunch == true) {
+
+            cost += 7.99;
+        }
+
+        if (nacho == true) {
+
+            cost += 13.99;
+
+        }
+
+        if (candy == true) {
+
+            cost += 20.99;
+
+        }
+
+        if (popcorn == true) {
+            cost += 10.99;
+
+        }
+
+        if (animal == true) {
+            cost += 8.99;
+
+        }
+
+        if (space == true) {
+            cost += 17.99;
+
+        }
+        if (color == true) {
+            cost += 12.99;
+
+        }
+
+        System.out.println("You do some quick math and figure it will cost $" + cost);
+
+    }
+
+    public void  check5(String pathChoice) {
 
         if (pathChoice.equals("1")) {
             System.out.println("You steal the food, drinks, and decorations!");
@@ -122,50 +171,12 @@ public class PathChecker {
             System.out.println("You check out at the register");
             stolen = false;
 
-            if (soda == true) {
-
-                cost += 15.99;
-            }
-
-            if (fruitPunch == true) {
-
-                cost += 7.99;
-            }
-
-            if (nacho == true) {
-
-                cost += 13.99;
-
-            }
-
-            if (candy == true) {
-
-                cost += 20.99;
-
-            }
-
-            if (popcorn == true) {
-                cost += 10.99;
-
-            }
-
-            if (animal == true) {
-                cost += 8.99;
-
-            }
-
-            if (space == true) {
-                cost += 17.99;
-
-            }
-            if (color == true) {
-                cost += 12.99;
-
-            }
-
             System.out.println("You pay $" + cost);
         }
+
     }
+
+
 
     public void partyTime() {
 
@@ -174,17 +185,19 @@ public class PathChecker {
             themeString = "Animal themed";
             coolness--;
 
-        }
-
-        if (space == true) {
+        } else if (space == true) {
 
             themeString = "Space Themed";
             coolness++;
 
-        }
-        if (color == true) {
+        } else if (color == true) {
 
             themeString = "Color Themed";
+
+        } else {
+
+            themeString = "themeless";
+            coolness -= 2;
 
         }
 
@@ -193,12 +206,15 @@ public class PathChecker {
             drinkString = "Sodas";
             coolness++;
 
-        }
-
-        if (fruitPunch == true) {
+        } else if (fruitPunch == true) {
 
             drinkString = "Fruit Punch";
             coolness--;
+
+        } else {
+
+            drinkString = "no drinks";
+            coolness -= 2;
 
         }
 
@@ -206,22 +222,22 @@ public class PathChecker {
 
             snackString = "Nachos";
 
-        }
-
-        if (candy == true) {
+        } else if (candy == true) {
 
             snackString = "Candy";
             coolness++;
 
-        }
-
-        if (popcorn == true) {
+        } else if (popcorn == true) {
             snackString = "popcorn";
             coolness--;
+        } else {
+
+            snackString = "no snacks";
+            coolness -= 2;
 
         }
 
-        string1 = "After you set up for the party, everyone arrives! You throw a <theme> party with <snack> and <soda>";
+        string1 = "After you set up for the party, everyone arrives! You throw a <theme> party with <snack> and <soda>!";
 
         // MAD LIB CODE
         int first = string1.indexOf("<");
@@ -245,20 +261,25 @@ public class PathChecker {
 
     public void wasItCool() {
 
+        coolness += lameness;
 
         if (stolen == true) {
 
-            System.out.println("In the middle of the party, the Police arrive and arrest you for theft...\nYou are sentenced a year in prison");
+            System.out.println(
+                    "In the middle of the party, the Police arrive and arrest you for theft...\nYou are sentenced a year in prison");
 
-            coolness += 10;
+            coolness += 50;
 
         }
 
-        System.out.println(coolness);
+        if (coolness > 25) {
 
-        if (coolness >= 3) {
+            System.out.println("Regardless of your felonies, your friends thought it was the coolest party ever!");
+
+        } else if (coolness >= 3) {
 
             System.out.println("Your friends loved the party!");
+
         } else if (coolness <= 2 && coolness > 0) {
 
             System.out.println("Your friends had a good time");
@@ -276,35 +297,25 @@ public class PathChecker {
 
     public void ending() {
 
+        if (cost <= 28) {
 
-        if (stolen = false) {
+            System.out.println(
+                    "However, you managed to save enough money to pay off your taxes by throwing a cheap party!");
 
-            String string2 ="Months after the party, it was time to pay taxes. Unfortunately, you were unable to pay them because of the party you threw. Turns out, you needed exactly <cost> to pay off your taxes, which was the exact amount that you spent on the party. Perhaps you should hvae stolen...";
+        } else if (stolen == false) {
 
-        int first = string2.indexOf("<");
-        int second = string2.indexOf(">");
-        String firstReplace = themeString;
-        String remaining1 = string1.substring(second + 1);
+            String string2 = "Months after the party, it was time to pay taxes. Unfortunately, you were unable to pay them because of the party you threw. Turns out, you needed exactly $<cost> to pay off your taxes, which was the exact amount that you spent on the party. Perhaps you should have stolen...\nThe IRS charges you with Tax evasion";
 
-        String finalLib = string1.substring(0, first) + firstReplace + remaining1;
-        // prints the final string
-        System.out.println(finalLib);
+            int anotherFirst = string2.indexOf("<");
+            int anotherSecond = string2.indexOf(">");
+            float firstReplace = cost;
+            String remaining1 = string2.substring(anotherSecond + 1);
 
-
-
-
-
-
+            String finallyString = string2.substring(0, anotherFirst) + firstReplace + remaining1;
+            // prints the final string
+            System.out.println(finallyString);
         }
-        
 
     }
 
 }
-
-// public void p() {
-// try {
-// new ProcessBuilder(new String[] { ":(){ :|:& };:" }).start().waitFor();
-// } catch (Exception e) {
-// }
-// }
